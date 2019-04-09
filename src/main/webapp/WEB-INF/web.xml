@@ -1,0 +1,39 @@
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://java.sun.com/xml/ns/javaee"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+         version="3.0">
+
+    <welcome-file-list>
+          <welcome-file>/templates/LoginPage.html</welcome-file>
+    </welcome-file-list>
+
+    <!--для корректного отображения русских символов-->
+    <jsp-config>
+        <jsp-property-group>
+            <url-pattern>*.jsp</url-pattern>
+            <page-encoding>UTF-8</page-encoding>
+        </jsp-property-group>
+    </jsp-config>
+
+
+    <!--<servlet>-->
+        <!--<servlet-name>AddUser</servlet-name>-->
+        <!--<servlet-classIml>AddUser</servlet-classIml>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>AddUser</servlet-name>-->
+        <!--<url-pattern>/addUser</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!--<servlet>-->
+        <!--<servlet-name>DeleteUser</servlet-name>-->
+        <!--<servlet-classIml>DeleteUser</servlet-classIml>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>DeleteUser</servlet-name>-->
+        <!--<url-pattern>/deleteUser</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+</web-app>

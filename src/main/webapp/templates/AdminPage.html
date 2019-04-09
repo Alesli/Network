@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .item1 {
+            grid-area: header;
+        }
+
+        .item2 {
+            grid-area: menu;
+        }
+
+        .item3 {
+            grid-area: main;
+            overflow: auto;
+            height: 400px;
+        }
+
+        .item4 {
+            grid-area: footer;
+        }
+
+        .grid-container {
+            display: grid;
+            grid-template-areas: 'header header header header header header header header header header header header' 'menu menu menu menu menu menu main main main main main main ' 'menu menu menu menu menu menu main main main main main main ';
+            grid-gap: 3px;
+            background-color: #2196F3;
+            padding: 5px;
+        }
+
+        .grid-container > div {
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 10px 0;
+            font-size: 15px;
+        }
+    </style>
+    <script type="text/javascript">
+        function callServlet( addr) {
+            document.forms[0].action = addr;
+            document.forms[0].submit();
+        }
+    </script>
+</head>
+<body>
+
+<div class="w3-conteiner w3-auto">
+
+    <div class="grid-container">
+
+
+        <div class="item1">Rooms List
+            <div>room1, room2
+            </div>
+        </div>
+
+
+        <div class="item2">User List
+            <br><br>
+            <span th:each="item : ${adminData.users}">
+            <br>
+            <span th:text="${item.name} "></span>
+            <span th:text="${item.lastName} "></span>
+            </span>
+            <br><br>
+            <form  method="get">
+                <label for="login"> Login </label>
+                <input  id="login" name="login" th:value=" ${adminData.activeUser.login}">
+
+                <label for="name"> Name </label>
+                <input  id="name" name="name" th:value=" ${adminData.activeUser.name}">
+                <br>
+                <label for="lastName"> Last name </label>
+                <input  id="lastName" name="lastName" th:value=" ${adminData.activeUser.lastName}">
+                <br>
+                <label for="password"> Password </label>
+                <input  id="password" name="password" th:value=" ${adminData.activeUser.password}">
+                <br>
+                <label for="nickname"> Nickname </label>
+                <input  id="nickname" name="nickname" th:value=" ${adminData.activeUser.nickname}">
+                <input type="hidden" id="id" name="userId" th:value=" ${adminData.activeUser.id}">
+                <input type="hidden" id="room" name="caption" th:value=" ${adminData.activeRoom.caption}">
+                <input type="hidden" id="secretKey" name="DsfR" th:value="'true'">
+
+                <button type="submit" class="w3-btn w3-blue-grey" onclick="callServlet('/addUser');" >
+                    <span th:text="'Create user'">&nbsp;</span>
+                </button>
+                <button class="w3-btn w3-blue-grey" onclick="callServlet('/updateUser');">
+                    <span th:text="'Update user'">&nbsp;</span>
+                </button>
+                <button class="w3-btn w3-blue-grey"  onclick="callServlet('/deleteUser');">
+                    <span th:text="'Delete user'">&nbsp;</span>
+                </button>
+            </form>
+        </div>
+
+
+        <div class="item3">Room List
+            <br><br>
+            <span th:each="item : ${adminData.rooms}">
+                <br>
+            <span th:text="${item.caption}">&nbsp;</span>
+            </span>
+        </div>
+
+
+
+    </div>
+</div>
+
+
+<!--<div classIml="w3-conteiner w3-auto">-->
+
+    <!---->
+    <!--<div classIml="grid-container">-->
+        <!--<div>-->
+                <!--<span th:each="item : ${adminData.rooms}">-->
+                    <!--<span th:text="${item.caption}">&nbsp;</span>-->
+                <!--</span>-->
+        <!--</div>-->
+
+
+    <!--<div classIml="item2">User List-->
+        <!--<span th:each="item : ${adminData.users}">-->
+                <!--<br>-->
+                    <!--<span th:text="${item.name} "></span>-->
+                   <!--<span th:text="${item.lastName} "></span>-->
+                <!--</span>-->
+    <!--</div>-->
+    <!--</div>-->
+<!--</div>-->
+
+</body>
+</html>

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head lang="ru">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>Login</title>
+</head>
+
+<body>
+
+<form name="Login" action="/login" method="get">
+
+    <label for="login"> Input your login </label>
+    <input type="text" id="login" name="login">
+    <p></p>
+    <label for="password"> Input your password </label>
+    <input type="text" id="password" name="password">
+    <p></p>
+    <input type="submit" value="Login">
+
+</form>
+<br>
+<form name="addUser" action="/createUser" method="get">
+    <input type="submit" value="Add new user">
+
+</form>
+</br>
+<p><span th:text="${userNotFound}"></span></p>
+</body>
+</html>

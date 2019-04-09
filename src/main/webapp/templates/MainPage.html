@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <style>
+        .item1 {
+            grid-area: header;
+        }
+
+        .item2 {
+            grid-area: menu;
+        }
+
+        .item3 {
+            grid-area: main;
+        }
+
+        .item4 {
+            grid-area: footer;
+        }
+        form{display: inline-block}
+        .grid-container {
+            display: grid;
+            grid-template-areas: 'header header header header header'
+            'menu main main main main '
+            'menu footer footer footer footer ';
+            grid-gap: 3px;
+            background-color: #2196F3;
+            padding: 5px;
+        }
+
+        .grid-container > div {
+            background-color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 10px 0;
+            font-size: 15px;
+        }
+    </style>
+</head>
+<body>
+<div class="w3-conteiner w3-auto">
+
+    <div class="grid-container">
+        <div class="item1">Rooms List
+            <div>
+                <span th:each="item : ${data.rooms}">
+                   <span th:if="${item.caption == data.activeRoom.caption}">
+                       <strong>
+                           <span th:text="${item.caption}">&nbsp;</span>
+                       </strong>
+                   </span>
+                    <span th:unless="${item.caption == data.activeRoom.caption}">
+                     <form  method="get">
+                    <input type="hidden" id="captionR" name="caption" th:value=" ${item.caption}">
+                    <input type="hidden" id="userIdR" name="userId" th:value=" ${data.activeUser.id}">
+                        <button class="w3-btn w3-blue-grey" onclick="'/refresh'">
+                            <span th:text="${item.caption}">&nbsp;</span>
+                        </button>
+                     </form>
+                    </span>
+                </span>
+            </div>
+            <div th:if="${data.activeUser.admin}">
+            <form action="/adminPage" method="get"  >
+                <input type="hidden" id="userIdA" name="userId" th:value=" ${data.activeUser.id}">
+                <input type="hidden" id="captiond" name="caption" th:value=" ${data.activeRoom.caption}">
+                <button class="w3-btn w3-blue-grey">
+                    <span th:text="admin">&nbsp;</span>
+                </button>
+            </form>
+            </div>
+        </div >
+        <div class="item2">User List
+            <span th:each="item : ${data.users}">
+                <br>
+                    <span th:text="${item.name} "></span>
+                   <span th:text="${item.lastName} "></span>
+                </span>
+        </div>
+        <div class="item3">Message
+            <span th:each="item : ${data.messages}">
+                <br>
+                    <span th:text="${item.messageDate}"></span>
+                     <strong>
+                    <span th:text="${item.user.login}"></span>
+                    </strong>
+                    <span th:text="${item.message}"></span>
+                </span>
+        </div>
+        <div class="item4">
+            <div class="w3-row-padding">
+
+                <form action="/addMessageToRoom" method="get">
+                    <input type="hidden" id="caption" name="caption" th:value=" ${data.activeRoom.caption}">
+                    <input type="hidden" id="userId" name="userId" th:value=" ${data.activeUser.id}">
+                    <div class="w3-threequarter">
+                        <input class=" w3-input w3-border" type="text" id="message" name="message">
+                    </div>
+                    <div class="w3-quarter">
+                        <button class="w3-button w3-blue-grey">Send</button>
+                    </div>
+                </form>
+                <form action="/refresh" method="get">
+                    <input type="hidden" id="captio" name="caption" th:value=" ${data.activeRoom.caption}">
+                    <input type="hidden" id="userI" name="userId" th:value=" ${data.activeUser.id}">
+                    <button class="w3-button w3-blue-grey"> Refresh </button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+</body>
+</html>
+
+
